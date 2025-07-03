@@ -6,8 +6,8 @@ library(sf)
 library(leaflet)
 library(writexl)
 
-base_venta <- read.csv("C:/Users/JP1/Documents/GitHub/TP-FINAL/raw/precio-venta-deptos.csv" , sep = ";",stringsAsFactors = FALSE)
-base_alquiler <- read.csv("C:/Users/JP1/Documents/GitHub/TP-FINAL/raw/precio-alquiler-deptos.csv" , sep = ";",stringsAsFactors = FALSE)
+base_venta <- read.csv("C:/Users/JP1/Documents/GitHub/v2 tp final/Tp_Final-Cs_de_Datos_-Prado_Stanislawowski-/raw/precio-venta-deptos.csv" , sep = ";",stringsAsFactors = FALSE)
+base_alquiler <- read.csv("C:/Users/JP1/Documents/GitHub/v2 tp final/Tp_Final-Cs_de_Datos_-Prado_Stanislawowski-/raw/precio-alquiler-deptos.csv" , sep = ";",stringsAsFactors = FALSE)
 
 
 #FILTROS DE LA VENTA
@@ -42,13 +42,13 @@ base_alquiler <- base_alquiler %>%
 base_combinada_transacciones <-full_join(base_venta, base_alquiler , by=NULL , copy=FALSE )
 
 
-write_xlsx(base_combinada_transacciones, file.path("C:/Users/JP1/Documents/GitHub/TP-FINAL/output", "base_combinada_transacciones.xlsx"))
+write_xlsx(base_combinada_transacciones, file.path("C:/Users/JP1/Documents/GitHub/v2 tp final/Tp_Final-Cs_de_Datos_-Prado_Stanislawowski-/output", "base_combinada_transacciones.xlsx"))
 
 
 #ARRANCA EL CODIGO PARA LA DOLARIZACION DEL PRESTAMO UVA
 
-base_prestamos <- read.csv("C:/Users/JP1/Documents/GitHub/TP-FINAL/input/montos-creditos-hipotecarios-uva.csv" , sep = ";",stringsAsFactors = FALSE)
-tipo_cambio <- read.csv2("C:/Users/JP1/Documents/GitHub/TP-FINAL/input/Serie_dolar_combinada.csv" , sep = ";",stringsAsFactors = FALSE)
+base_prestamos <- read.csv("C:/Users/JP1/Documents/GitHub/v2 tp final/Tp_Final-Cs_de_Datos_-Prado_Stanislawowski-/input/montos-creditos-hipotecarios-uva.csv" , sep = ";",stringsAsFactors = FALSE)
+tipo_cambio <- read.csv2("C:/Users/JP1/Documents/GitHub/v2 tp final/Tp_Final-Cs_de_Datos_-Prado_Stanislawowski-/input/Serie_dolar_combinada.csv" , sep = ";",stringsAsFactors = FALSE)
 
 #RENOMBRO PARA PODER HACER UN JOIN
 tipo_cambio <- rename(tipo_cambio , año_mes = anio_mes)
@@ -71,7 +71,7 @@ prestamo_usd<- prestamo_usd %>%
   summarise(prestamos = sum(prestamo_dolar))
 
 
-write_xlsx(prestamo_usd, file.path("C:/Users/JP1/Documents/GitHub/TP-FINAL/output", "monto_prestamos_usd.xlsx"))
+write_xlsx(prestamo_usd, file.path("C:/Users/JP1/Documents/GitHub/v2 tp final/Tp_Final-Cs_de_Datos_-Prado_Stanislawowski-/output", "monto_prestamos_usd.xlsx"))
 
 
 
